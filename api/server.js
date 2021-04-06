@@ -1,8 +1,6 @@
 // BUILD YOUR SERVER HERE
 const express = require('express')
-const { reset } = require('nodemon')
 const User = require("./users/model.js")
-
 const server = express()
 
 server.use(express.json())
@@ -78,7 +76,7 @@ server.put("/api/users/:id", async (req,res)=>{
 server.delete("/api/users/:id", async (req,res)=>{
     try{
         const {id} = req.params
-        const deletedUser = await User.delete(id)
+        const deletedUser = await User.remove(id)
         if(!deletedUser){
             res.status(422).json("User doesn't exist")
         }else{
